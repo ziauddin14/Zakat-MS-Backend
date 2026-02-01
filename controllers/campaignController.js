@@ -1,9 +1,7 @@
 import Campaign from "../models/Campaign.js";
 import asyncHandler from "express-async-handler";
 
-// @desc    Create a new campaign
-// @route   POST /api/campaigns
-// @access  Private (Admin)
+
 const createCampaign = asyncHandler(async (req, res) => {
   const { title, description, goalAmount, startDate, endDate } = req.body;
 
@@ -23,9 +21,7 @@ const createCampaign = asyncHandler(async (req, res) => {
   res.status(201).json(campaign);
 });
 
-// @desc    Get all active campaigns
-// @route   GET /api/campaigns
-// @access  Public
+
 const getAllCampaigns = asyncHandler(async (req, res) => {
   const campaigns = await Campaign.find({ status: "active" }).sort({
     createdAt: -1,
@@ -33,9 +29,7 @@ const getAllCampaigns = asyncHandler(async (req, res) => {
   res.json(campaigns);
 });
 
-// @desc    Get single campaign by ID
-// @route   GET /api/campaigns/:id
-// @access  Public
+
 const getCampaignById = asyncHandler(async (req, res) => {
   const campaign = await Campaign.findById(req.params.id);
 

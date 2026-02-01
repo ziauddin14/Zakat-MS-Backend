@@ -2,9 +2,7 @@ import Donation from "../models/Donation.js";
 import Campaign from "../models/Campaign.js";
 import asyncHandler from "express-async-handler";
 
-// @desc    Create new donation
-// @route   POST /api/donations
-// @access  Private (User)
+
 const createDonation = asyncHandler(async (req, res) => {
   const { amount, donationType, category, paymentMethod, campaignId } =
     req.body;
@@ -36,9 +34,6 @@ const createDonation = asyncHandler(async (req, res) => {
   res.status(201).json(donation);
 });
 
-// @desc    Get logged in user's donations
-// @route   GET /api/donations/my
-// @access  Private (User)
 const getMyDonations = asyncHandler(async (req, res) => {
   const donations = await Donation.find({ user: req.user._id })
     .populate("campaign", "title")
@@ -47,9 +42,7 @@ const getMyDonations = asyncHandler(async (req, res) => {
   res.json(donations);
 });
 
-// @desc    Get donations by user (for Admin or self)
-// @route   GET /api/donations
-// @access  Private (User/Admin)
+
 const getDonationsByUser = asyncHandler(async (req, res) => {
   let query = {};
 
@@ -66,9 +59,7 @@ const getDonationsByUser = asyncHandler(async (req, res) => {
   res.json(donations);
 });
 
-// @desc    Update donation status (Admin)
-// @route   PUT /api/donations/:id/status
-// @access  Private (Admin)
+
 const updateDonationStatus = asyncHandler(async (req, res) => {
   const { status } = req.body;
   const donation = await Donation.findById(req.params.id);
@@ -83,7 +74,6 @@ const updateDonationStatus = asyncHandler(async (req, res) => {
 
   const updatedDonation = await donation.save();
 
-  // If status changed to approved and it's linked to a campaign, update campaign amount
   if (
     previousStatus !== "approved" &&
     status === "approved" &&
@@ -93,7 +83,6 @@ const updateDonationStatus = asyncHandler(async (req, res) => {
       $inc: { currentAmount: donation.amount },
     });
   }
-  // If was approved and now changed to something else, decrement campaign amount
   else if (
     previousStatus === "approved" &&
     status !== "approved" &&
@@ -107,9 +96,6 @@ const updateDonationStatus = asyncHandler(async (req, res) => {
   res.json(updatedDonation);
 });
 
-// @desc    Get single donation by ID
-// @route   GET /api/donations/:id
-// @access  Private (User)
 const getDonationById = asyncHandler(async (req, res) => {
   const donation = await Donation.findById(req.params.id).populate(
     "campaign",
@@ -121,7 +107,6 @@ const getDonationById = asyncHandler(async (req, res) => {
     throw new Error("Donation not found");
   }
 
-  // user can see only his donation unless admin
   if (
     donation.user.toString() !== req.user._id.toString() &&
     req.user.role !== "admin"

@@ -2,9 +2,7 @@ import asyncHandler from "express-async-handler";
 import Donation from "../models/Donation.js";
 import generateReceipt from "../utils/generateReceipt.js";
 
-// @desc    Download donation receipt as PDF
-// @route   GET /api/receipt/:id
-// @access  Private (User/Admin)
+
 const downloadReceipt = asyncHandler(async (req, res) => {
   const donation = await Donation.findById(req.params.id).populate(
     "user",

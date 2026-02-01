@@ -2,9 +2,7 @@ import User from "../models/User.js";
 import generateToken from "../utils/generateToken.js";
 import asyncHandler from "express-async-handler";
 
-// @desc    Register new user
-// @route   POST /api/auth/register
-// @access  Public
+
 const registerUser = asyncHandler(async (req, res) => {
   const { name, email, password } = req.body;
 
@@ -42,9 +40,7 @@ const registerUser = asyncHandler(async (req, res) => {
   }
 });
 
-// @desc    Login user
-// @route   POST /api/auth/login
-// @access  Public
+
 const loginUser = asyncHandler(async (req, res) => {
   const { email, password } = req.body;
 
@@ -70,9 +66,7 @@ const loginUser = asyncHandler(async (req, res) => {
   }
 });
 
-// @desc    Get logged in user profile
-// @route   GET /api/auth/profile
-// @access  Private
+
 const getUserProfile = asyncHandler(async (req, res) => {
   if (req.user) {
     res.json(req.user);

@@ -32,8 +32,12 @@ app.use("/api/auth", authRoutes);
 app.use("/api/donations", donationRoutes);
 app.use("/api/admin", adminRoutes);
 app.use("/api/receipt", receiptRoutes);
-app.use("/api/campaigns", campaignRoutes);
+a>
+/////////////////////////////////.????????????????????????????????????????///////.,///,/m///////////////////.?
 
+
+'
+;;,,/,'
 // Root
 app.get("/", (req, res) => res.send("Zakat Management Backend Running 🚀"));
 
