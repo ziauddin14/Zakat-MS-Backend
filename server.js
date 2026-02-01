@@ -32,11 +32,10 @@ app.use("/api/auth", authRoutes);
 app.use("/api/donations", donationRoutes);
 app.use("/api/admin", adminRoutes);
 app.use("/api/receipt", receiptRoutes);
-a >
-  /////////////////////////////////.????????????????????????????????????????///////.,///,/m///////////////////.?
+app.use("/api/campaigns", campaignRoutes);
 
-  // Root
-  app.get("/", (req, res) => res.send("Zakat Management Backend Running 🚀"));
+// Root
+app.get("/", (req, res) => res.send("Zakat Management Backend Running 🚀"));
 
 // Error Middlewares
 app.use(notFound);
