@@ -23,7 +23,7 @@ app.use(
   cors({
     origin: ["http://localhost:5173", "https://zakat-ms.vercel.app"], // frontend URLs
     credentials: true,
-  })
+  }),
 );
 app.use(express.json());
 
@@ -32,14 +32,11 @@ app.use("/api/auth", authRoutes);
 app.use("/api/donations", donationRoutes);
 app.use("/api/admin", adminRoutes);
 app.use("/api/receipt", receiptRoutes);
-a>
-/////////////////////////////////.????????????????????????????????????????///////.,///,/m///////////////////.?
+a >
+  /////////////////////////////////.????????????????????????????????????????///////.,///,/m///////////////////.?
 
-
-'
-;;,,/,'
-// Root
-app.get("/", (req, res) => res.send("Zakat Management Backend Running 🚀"));
+  // Root
+  app.get("/", (req, res) => res.send("Zakat Management Backend Running 🚀"));
 
 // Error Middlewares
 app.use(notFound);
